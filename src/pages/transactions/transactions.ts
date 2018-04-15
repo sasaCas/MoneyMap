@@ -15,6 +15,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class TransactionsPage {
 
+  titulo : string = "Movimientos";
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
