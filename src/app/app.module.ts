@@ -11,13 +11,18 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+// Añadimos aquí la nueva página además de en el
+// NgModule .declarations y en .entryComponents
+import { TransactionsPage } from '../pages/transactions/transactions';
+
 @NgModule({
   declarations: [
     MyApp,
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    TransactionsPage
   ],
   imports: [
     BrowserModule,
@@ -29,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    TransactionsPage
   ],
   providers: [
     StatusBar,
