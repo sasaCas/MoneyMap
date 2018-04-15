@@ -9,7 +9,7 @@ import { TransactionsPage } from '../transactions/transactions';
 })
 export class TabsPage {
 
-  tab1Root = TransactionsPage;
+  tab1Root = TransactionsPage; // camibado el home 
   tab2Root = AboutPage;
   tab3Root = ContactPage;
 
