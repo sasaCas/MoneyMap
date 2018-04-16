@@ -1,6 +1,14 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+// Importamos el MODELO
+import { Transaction } from '../../database';
+// Todas las acciones que queramos llevar a cabo
+// con la base de datos se deben hacer a través
+// del uso de este modelo
+// Es una buena práctica y evita errores. Así que es
+// obligatorio para ser productivo
+
 /**
  * Generated class for the TransactionsPage page.
  *
@@ -21,7 +29,17 @@ export class TransactionsPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad TransactionsPage');
+    // borramos el log que había aquí
+    // Y VAMOS A GENERAR UNA TRANSACCIÓN.
+    // Para ello creamos un nuevo objeto de la
+    // clase , Transaction, y para ello pego aquí el constructor:
+    // constructor(amount:number, title:string, lat?:number, lng?:numer,
+    //             id?:number, imageUrl?:string)
+    let transaction = new Transaction(20, "Primera transacción");
+    // Seguidamente cogemos el objeto recién creado y se lo pasamos
+    // por fin a indexDB.
+    transaction.save();
+
   }
 
 }
