@@ -19,7 +19,7 @@ import { Transaction } from '../../database';
 @IonicPage()
 @Component({
   selector: 'page-transactions',
-  templateUrl: 'transactions.html',
+  templateUrl: 'transactions.html', // esta línea lo une con el html
 })
 export class TransactionsPage {
 
