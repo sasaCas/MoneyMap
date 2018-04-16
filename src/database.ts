@@ -81,6 +81,24 @@ export class Transaction implements ITransaction{
     save(){
     return db.transactions.add(this);
   }
+
+    // Vamos a crear el método , all(), el cual
+    // ES ESTÁTICO y nos devolverá todas las transacciones.
+    static all(){
+      // Transaction.all() => Todas las transacciones
+
+      // el argumento , transactions , hace referencia al que
+      // hemos declarado en la actual línea 17, justo encima del
+      // constructor de la clase de la database.
+      // Por otro lado, escribiendo así el , orderBy , conseguimos
+      // que se ordenen los , id , de menor a mayor. El , .reverse ,
+      // hará que se ordene de MAyor a menor y el , .toArray(); , lo
+      // convierte en un array.
+      return db.transactions.orderBy("id").reverse().toArray();
+      // este return devolvolverá un Promise.
+
+    }
+
 }
 
 // Ahora vamos a exportar una instancia a la base de datos

@@ -25,21 +25,36 @@ export class TransactionsPage {
 
   titulo : string = "Movimientos";
 
+  // Necesitamos crear un argumento transactions para
+  // poder hacer uso de él más abajo en el Promise
+  // que devuelve , loadTransactions ,.
+  transactions : any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
-    // borramos el log que había aquí
-    // Y VAMOS A GENERAR UNA TRANSACCIÓN.
-    // Para ello creamos un nuevo objeto de la
-    // clase , Transaction, y para ello pego aquí el constructor:
-    // constructor(amount:number, title:string, lat?:number, lng?:numer,
-    //             id?:number, imageUrl?:string)
-    let transaction = new Transaction(20, "Primera transacción");
-    // Seguidamente cogemos el objeto recién creado y se lo pasamos
-    // por fin a indexDB.
-    transaction.save();
+    // Anteriormente aquí sólo hicimos pruebas de test de base
+    // de datos para ver que funcionaba. Esas líneas las hemos
+    // borrado ahora.
 
+    // Vamos a llamar a un método nuevo y lo vamos
+    // a crear más abajo.
+    this.loadTransactions();
+
+  }
+
+    // Y lo creamos aquí
+    loadTransactions(){
+      // Vamos a llamar al método , all(), recién creado en
+      // el otro archivo. Tenemos en cuenta que , all() , devuelve
+      // una promesa así que ya la vamos a empezar a tratar como tal
+      Transaction.all() // notar que aquí no hay , ; ,.
+        .then((resultados) => {
+
+        this.transactions = resultados;
+        console.log(this.transactions);
+      });
   }
 
 }
