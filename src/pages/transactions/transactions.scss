@@ -1,3 +1,15 @@
 page-transactions {
+  ion-fab{
+    // Colocamos el floating button abajo a la derecha
+    bottom: 1em;
+    right: 1em;
 
+    // Y seguimos dentro del ion-fab
+    button{
+      // Le ponemos , !important , para que
+      // sobreescriba el valor por default
+      background-color: #222 !important;
+      font-size: 1.5em !important;
+    }
+  }
 }
