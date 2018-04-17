@@ -24,13 +24,19 @@
   </ion-item>
   <ion-item>
     <ion-label floating>Monto</ion-label>
+    <!-- El tipo , number , hará que en un teléfono, al pulsar
+    en el editText nos aparezca un teclado numérico -->
     <ion-input type="number"></ion-input>
   </ion-item>
   <!-- <ion-item></ion-item> -->
   <!-- Dejamos comentado ese último item porque más adelante es cuando
   lo vamos a configurar. Nos servirá para la imagen y demás. -->
 
-    <!-- Añadimos aquí un botón -->
-    <button ion-button>Agregar</button>
+    <!-- queremos hacer algunas modificaciones en el css así
+    que modificamos esta parte del código metiendo el botón
+    dentro de un , div ,. -->
+    <div class="actions">
+      <button ion-button>Agregar</button>
+    </div>
 
 </ion-content>

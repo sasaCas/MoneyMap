@@ -1,3 +1,8 @@
 page-adding {
-
+  // introducimos el código dentro de estas llasves
+  // para que permanezca dentro de este scope
+  .actions{
+    text-align: right;
+    margin-top: 20px;
+  }
 }
