@@ -9,6 +9,14 @@ import { Transaction } from '../../database';
 // Es una buena práctica y evita errores. Así que es
 // obligatorio para ser productivo
 
+// De este archivo vamos a hacer una vista subordinada
+// que nos servirá para introducir manualmente las
+// nuevas transacciones. Para ello vamos a acceder desde
+// aquí a la vista recién creada , adding, y para ello debemos
+// antes que nada importar su clase
+import { AddingPage } from '../adding/adding';
+
+
 /**
  * Generated class for the TransactionsPage page.
  *
@@ -29,6 +37,12 @@ export class TransactionsPage {
   // poder hacer uso de él más abajo en el Promise
   // que devuelve , loadTransactions ,.
   transactions : any;
+
+  // A continuación del import vamos a almacenar
+  // esa clase en una variable
+  addingPage = AddingPage;
+  // y ahora esta variable declarada aquí, la asignamos como
+  // valor en el , navPush , de este html enlazado.
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }

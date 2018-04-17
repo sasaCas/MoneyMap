@@ -15,6 +15,10 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 // NgModule .declarations y en .entryComponents
 import { TransactionsPage } from '../pages/transactions/transactions';
 
+// Debemos declarar la página nueva en este archivo
+// en todos los sitios correspondientes
+import { AddingPage } from '../pages/adding/adding';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -22,7 +26,8 @@ import { TransactionsPage } from '../pages/transactions/transactions';
     ContactPage,
     HomePage,
     TabsPage,
-    TransactionsPage
+    TransactionsPage,
+    AddingPage
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,8 @@ import { TransactionsPage } from '../pages/transactions/transactions';
     ContactPage,
     HomePage,
     TabsPage,
-    TransactionsPage
+    TransactionsPage,
+    AddingPage
   ],
   providers: [
     StatusBar,
