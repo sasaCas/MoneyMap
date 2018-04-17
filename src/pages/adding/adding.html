@@ -20,13 +20,15 @@
       estamos agregando -->
   <ion-item>
     <ion-label floating>Descripción</ion-label>
-    <ion-input type="text"></ion-input>
+      <!-- Ampliamos el código de este editText con un
+      two way data binding para hacernos con el input  -->
+    <ion-input type="text" [(ngModel)]="model.title"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label floating>Monto</ion-label>
     <!-- El tipo , number , hará que en un teléfono, al pulsar
     en el editText nos aparezca un teclado numérico -->
-    <ion-input type="number"></ion-input>
+    <ion-input type="number" [(ngModel)]="model.amount"></ion-input>
   </ion-item>
   <!-- <ion-item></ion-item> -->
   <!-- Dejamos comentado ese último item porque más adelante es cuando
@@ -36,7 +38,9 @@
     que modificamos esta parte del código metiendo el botón
     dentro de un , div ,. -->
     <div class="actions">
-      <button ion-button>Agregar</button>
+      <!-- Vamos a hacer que el botón llame a un método save()
+      que tenemos que crear en el archio asociado -->
+      <button ion-button (click)="save()">Agregar</button>
     </div>
 
 </ion-content>
