@@ -47,7 +47,13 @@ export class TransactionsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
+  // Cambiamos el método que había aquí por el que se ve a continuación.
+  // Respetamos el código contenido así que únicamente cambiamos el
+  // nombre del método. Este nuevo lo que hace es que carga la vista
+  // cada vez. No sólo carga la vista la primera vez sino que la
+  // consigue recargar cuando regresamos a ésta desde la otra vista
+  // de agregaciones de items(en , adding , con el botón AGREGAR)
+  ionViewWillEnter() {
     // Anteriormente aquí sólo hicimos pruebas de test de base
     // de datos para ver que funcionaba. Esas líneas las hemos
     // borrado ahora.

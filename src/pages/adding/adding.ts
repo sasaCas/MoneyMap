@@ -60,6 +60,17 @@ export class AddingPage {
         // , model.title ="" , por ejemplo pero nunca esta solución
         // que a la vista está que funciona muy bien.
 
+        // Es sencillo regresar a la vista anterior porque estamos
+        // dentro del mismo stack. En esta pila sólamente habremos
+        // de volver al elemento anterior.
+        // Para esto hacemos uso de , navCtrl ,(mirar el
+        // constructor, ya estaba así construído) que es una instancia
+        // de , NavController , que a su vez está siendo importada,
+        // tal y como observamos en este archivo, de ionic-angular.
+        // Con la instrucción siguiente vamos a quitar la última vista
+        // de la pila y conseguimos que se vuelva a la anterior.
+        this. navCtrl.pop();        
+
     });
   }
 
