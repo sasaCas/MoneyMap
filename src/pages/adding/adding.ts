@@ -42,8 +42,25 @@ export class AddingPage {
 
   }
 
-  save(){
-    this.model.save();
+    save(){
+      // SIIIIIIÍ. SÓLO CON ESTAS LÍNEAS DE CÓDIGO NUEVAS YA HEMOS
+      // ARREGLADO EL ASUNTO DEL ERROR ANTERIOR QUE NOS DECÍA ESO
+      // DE , Key already exists ,.
+
+      // el método , save() del modelo devuelve una promesa que se
+      // ejecuta cuando termina de grabar el modelo. Ampliamos pues
+      // esta parte del código de la siguiente manera.
+      this.model.save().then(result => {
+        // limpiamos instanciando de nuevo el objeto
+        this.model = new Transaction(null, "");
+        // Nunca se me hubiera ocurrido instanciar de nuevo el
+        // mismo objeto para llamarlo con el mismo nombre de variable
+        // Supongo que es una práctica de programación que debo
+        // tener en mente. A mi se me hubiera ocurrido algo como:
+        // , model.title ="" , por ejemplo pero nunca esta solución
+        // que a la vista está que funciona muy bien.
+
+    });
   }
 
 }
