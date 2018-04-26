@@ -6,6 +6,9 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 // dentro del archivo database, NO confundir con TransactionPage
 import { Transaction } from '../../database';
 
+import { GeolocationService } from '../../services/geolocation.service';
+
+
 
 /**
  * Generated class for the AddingPage page.
@@ -27,7 +30,9 @@ export class AddingPage {
   // Hay más gente igual y esto parece que resuelve el problema.
   model : Transaction = new Transaction(null, "");
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  // Vamos a injectar el servicio creado y para eso lo
+  // introducimos en el constructor
+  constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator: GeolocationService) {
   }
 
   ionViewDidLoad() {
@@ -39,6 +44,12 @@ export class AddingPage {
       // pero he tenido que nombrarlo fuera, justo en la clase
       // porque aquí no se construía el objeto. Lo que voy a hacer es
       // asignarle unos valores para probarlo.
+
+      // Después de que esta vista se cargue
+      // vamos a comprobar imprimiendo la llamada geolocalizadora
+      this.geolocator.get().then((resultado)=>{
+        console.log(resultado);
+    }).catch((err)=> console.log(err));
 
   }
 
@@ -69,7 +80,7 @@ export class AddingPage {
         // tal y como observamos en este archivo, de ionic-angular.
         // Con la instrucción siguiente vamos a quitar la última vista
         // de la pila y conseguimos que se vuelva a la anterior.
-        this. navCtrl.pop();        
+        this.navCtrl.pop(); // funcionaba pero le quito el espacio
 
     });
   }

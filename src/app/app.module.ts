@@ -19,6 +19,13 @@ import { TransactionsPage } from '../pages/transactions/transactions';
 // en todos los sitios correspondientes
 import { AddingPage } from '../pages/adding/adding';
 
+// Acabamos de crear esa clase nueva y para usarla la importamos
+// aquí y también la declaramos en los providers.
+import { GeolocationService } from '../services/geolocation.service';
+// He tenido que importar esto para declararlo en , provider ,.
+import { Geolocation } from '@ionic-native/geolocation';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -46,7 +53,10 @@ import { AddingPage } from '../pages/adding/adding';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    GeolocationService,
+    Geolocation // si no se pone este provider te salta
+                // un error advirtiendo que lo hagas.
   ]
 })
 export class AppModule {}
