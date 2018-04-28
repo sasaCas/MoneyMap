@@ -34,6 +34,15 @@ export class AddingPage {
   // al html en el campo del toggle
   shouldGeolocate : boolean = false;
 
+  // Declaramos una nueva variable para controlar si el formulario está
+  // listo para ser enviado.
+  // La inciamos en true porque, en principio, el formulario está listo
+  // para ser enviado porque se carga por defecto
+  // sin coordenadas. Ejercerá control de cuándo el formulario puede ser
+  // enviado pasando a false si las coordenadas no han sido cargadas en
+  // caso de que hayamos solicitado conseguirlas
+  shouldSend : boolean = true;
+
   // Vamos a injectar el servicio creado y para eso lo
   // introducimos en el constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator: GeolocationService) {
@@ -54,7 +63,11 @@ export class AddingPage {
     // cuando se produce el cambio del botón toggle.
     getLocation(){
       if(this.shouldGeolocate){
-          // vamos a comprobar imprimiendo la llamada geolocalizadora
+          // En el momento en que se cargan las coordenadas, debemos
+          // cambiar el valor de esta variable para tener el control
+          // de cuándo se cargan las mismas
+          this.shouldSend = false;
+
           this.geolocator.get().then((resultado)=>{
           // borramos el , log , porque vamos a dar funcionalidad de verdad
 
@@ -63,46 +76,54 @@ export class AddingPage {
           // creado allí para grabar nuestras coordenadas.
           this.model.setCoords(resultado.coords);
           console.log(this.model);
+
+          // y cuando se terminan de cargar las coordenadas, volvemos a
+          // decir que el formulario está listo
+          this.shouldSend = true;
+
         }).catch((err)=> console.log(err));
       } else{
           // Esto es fácil, aquí, si el usuario no quiere grabar sus
           // coordenadas, pues llamamos al método que las borra.
           this.model.cleanCoords();
           console.log(this.model);
-      }
 
+          // Y si volvemos a pulsar el toggle pues se limpian
+          // las coordenadas y el formulario vuelve a estar listo
+          // para ser enviado.
+          this.shouldSend = true;
+      }
     }
 
     save(){
-      // SIIIIIIÍ. SÓLO CON ESTAS LÍNEAS DE CÓDIGO NUEVAS YA HEMOS
-      // ARREGLADO EL ASUNTO DEL ERROR ANTERIOR QUE NOS DECÍA ESO
-      // DE , Key already exists ,.
+      // Usamos , shouldSend , para saber si estamos listos para grabar
+      // así que el código de este , save() , lo metemos dentro de
+      // un , if , para que se ejecute sólo si el formulario está listo.
+      if(this.shouldSend){
+        // el método , save() del modelo devuelve una promesa que se
+        // ejecuta cuando termina de grabar el modelo. Ampliamos pues
+        // esta parte del código de la siguiente manera.
+        this.model.save().then(result => {
+          // limpiamos instanciando de nuevo el objeto
+          this.model = new Transaction(null, "");
+          // Nunca se me hubiera ocurrido instanciar de nuevo el
+          // mismo objeto para llamarlo con el mismo nombre de variable
+          // Supongo que es una práctica de programación que debo
+          // tener en mente. A mi se me hubiera ocurrido algo como:
+          // , model.title ="" , por ejemplo pero nunca esta solución
+          // que a la vista está que funciona muy bien.
 
-      // el método , save() del modelo devuelve una promesa que se
-      // ejecuta cuando termina de grabar el modelo. Ampliamos pues
-      // esta parte del código de la siguiente manera.
-      this.model.save().then(result => {
-        // limpiamos instanciando de nuevo el objeto
-        this.model = new Transaction(null, "");
-        // Nunca se me hubiera ocurrido instanciar de nuevo el
-        // mismo objeto para llamarlo con el mismo nombre de variable
-        // Supongo que es una práctica de programación que debo
-        // tener en mente. A mi se me hubiera ocurrido algo como:
-        // , model.title ="" , por ejemplo pero nunca esta solución
-        // que a la vista está que funciona muy bien.
-
-        // Es sencillo regresar a la vista anterior porque estamos
-        // dentro del mismo stack. En esta pila sólamente habremos
-        // de volver al elemento anterior.
-        // Para esto hacemos uso de , navCtrl ,(mirar el
-        // constructor, ya estaba así construído) que es una instancia
-        // de , NavController , que a su vez está siendo importada,
-        // tal y como observamos en este archivo, de ionic-angular.
-        // Con la instrucción siguiente vamos a quitar la última vista
-        // de la pila y conseguimos que se vuelva a la anterior.
-        this.navCtrl.pop(); // funcionaba pero le quito el espacio
-
-    });
+          // Es sencillo regresar a la vista anterior porque estamos
+          // dentro del mismo stack. En esta pila sólamente habremos
+          // de volver al elemento anterior.
+          // Para esto hacemos uso de , navCtrl ,(mirar el
+          // constructor, ya estaba así construído) que es una instancia
+          // de , NavController , que a su vez está siendo importada,
+          // tal y como observamos en este archivo, de ionic-angular.
+          // Con la instrucción siguiente vamos a quitar la última vista
+          // de la pila y conseguimos que se vuelva a la anterior.
+          this.navCtrl.pop(); // funcionaba pero le quito el espacio
+      });
+    }
   }
-
 }

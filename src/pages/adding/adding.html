@@ -43,7 +43,10 @@
     <div class="actions">
       <!-- Vamos a hacer que el botón llame a un método save()
       que tenemos que crear en el archio asociado -->
-      <button ion-button (click)="save()">Agregar</button>
+      <!-- Hacemos binding de la propiedad , [disable] , y lo igualamos al
+      negativo de , shouldSend , recién creado para que desabilite el
+      botón mientras la variable esté en false. -->
+      <button ion-button (click)="save()" [disabled]="!shouldSend">Agregar</button>
     </div>
 
 </ion-content>
