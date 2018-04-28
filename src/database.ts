@@ -81,6 +81,23 @@ export class Transaction implements ITransaction{
     save(){
     return db.transactions.add(this);
   }
+    // Creamos el método que guardará las coordenadas
+    // Recibe las coordenadas
+    setCoords(coords){
+
+      this.lat = coords.latitude;
+      this.lng = coords.longitude;
+
+    }
+    // Creamos el método que borrará las coordenadas del formulario
+    // si es que el usuario así lo desea.
+    // No tiene que recibir nada porque sólo tiene que limpiarlas
+    cleanCoords(){
+
+      this.lat = null;
+      this.lng = null;
+
+    }
 
     // Vamos a crear el método , all(), el cual
     // ES ESTÁTICO y nos devolverá todas las transacciones.

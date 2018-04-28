@@ -30,6 +30,10 @@ export class AddingPage {
   // Hay más gente igual y esto parece que resuelve el problema.
   model : Transaction = new Transaction(null, "");
 
+  // Añadimos aquí la variable de control recién incorporada
+  // al html en el campo del toggle
+  shouldGeolocate : boolean = false;
+
   // Vamos a injectar el servicio creado y para eso lo
   // introducimos en el constructor
   constructor(public navCtrl: NavController, public navParams: NavParams, public geolocator: GeolocationService) {
@@ -44,14 +48,30 @@ export class AddingPage {
       // pero he tenido que nombrarlo fuera, justo en la clase
       // porque aquí no se construía el objeto. Lo que voy a hacer es
       // asignarle unos valores para probarlo.
-
-      // Después de que esta vista se cargue
-      // vamos a comprobar imprimiendo la llamada geolocalizadora
-      this.geolocator.get().then((resultado)=>{
-        console.log(resultado);
-    }).catch((err)=> console.log(err));
-
   }
+
+    // Creamos el método que es llamado por el evento ion-Change
+    // cuando se produce el cambio del botón toggle.
+    getLocation(){
+      if(this.shouldGeolocate){
+          // vamos a comprobar imprimiendo la llamada geolocalizadora
+          this.geolocator.get().then((resultado)=>{
+          // borramos el , log , porque vamos a dar funcionalidad de verdad
+
+          // El objeto model es la instancia de la clase Transaction la cuál es
+          // nuestro modelo. Es sencillo, vamos a usar el método recién
+          // creado allí para grabar nuestras coordenadas.
+          this.model.setCoords(resultado.coords);
+          console.log(this.model);
+        }).catch((err)=> console.log(err));
+      } else{
+          // Esto es fácil, aquí, si el usuario no quiere grabar sus
+          // coordenadas, pues llamamos al método que las borra.
+          this.model.cleanCoords();
+          console.log(this.model);
+      }
+
+    }
 
     save(){
       // SIIIIIIÍ. SÓLO CON ESTAS LÍNEAS DE CÓDIGO NUEVAS YA HEMOS

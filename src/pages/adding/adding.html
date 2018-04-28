@@ -25,14 +25,17 @@
     <ion-input type="text" [(ngModel)]="model.title"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label floating>Monto</ion-label>
+    <ion-label floating>Monto Gastado</ion-label>
     <!-- El tipo , number , hará que en un teléfono, al pulsar
     en el editText nos aparezca un teclado numérico -->
     <ion-input type="number" [(ngModel)]="model.amount"></ion-input>
   </ion-item>
-  <!-- <ion-item></ion-item> -->
-  <!-- Dejamos comentado ese último item porque más adelante es cuando
-  lo vamos a configurar. Nos servirá para la imagen y demás. -->
+  <ion-item>
+    <ion-label>Guardar ubicación</ion-label>
+    <!-- , ion-Change , es un evento para que detecte cuándo
+        cambia el botón de posición-->
+    <ion-toggle [(ngModel)]="shouldGeolocate" (ionChange)="getLocation()"></ion-toggle>
+  </ion-item>
 
     <!-- queremos hacer algunas modificaciones en el css así
     que modificamos esta parte del código metiendo el botón
